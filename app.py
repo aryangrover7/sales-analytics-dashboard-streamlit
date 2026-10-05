@@ -197,11 +197,14 @@ st.subheader(
     "Sales by Product"
 )
 
-st.bar_chart(
-    filtered_df,
-    x="Product",
-    y="Sales"
+product_sales = (
+    filtered_df
+    .groupby("Product")["Sales"]
+    .sum()
+    .sort_values(ascending=False)
 )
+
+st.bar_chart(product_sales)
 
 
 # -----------------------------
